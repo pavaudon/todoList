@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === "DELETE") {
             echo json_encode(array("message" => "La suppression n'a pas été éffectuée"));
         }
     } else {
+      http_response_code(503);
         echo json_encode(['message' => "Vous devez preciser l'identifiant du user"]);
     }
 } else {

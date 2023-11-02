@@ -33,16 +33,18 @@ class Task {
     return true;
   }
 
+  public function getTasks($user_id) {
+    $sql = "SELECT t.* FROM $this->table t WHERE t.user_id = :user_id";
+    $req = $this->connexion->prepare($sql);
+    $req->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $req->execute();
+    return $req;
+  }
   public function getAll()
     {
-        // On ecrit la requete
-        $sql = "SELECT * FROM $this->table ORDER BY id DESC";
-
-        // On éxecute la requête
-        $req = $this->connexion->query($sql);
-
-        // On retourne le resultat
-        return $req;
+      $sql = "SELECT * FROM $this->table ORDER BY id DESC";
+      $req = $this->connexion->query($sql);
+      return $req;
     }
 
     public function create()

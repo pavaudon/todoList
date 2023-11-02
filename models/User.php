@@ -65,7 +65,7 @@ class User
     }
 
     public function getUserById($id) {
-        $sql = "SELECT id FROM user WHERE id = :id";
+        $sql = "SELECT id FROM $this->table WHERE id = :id";
         // Préparation de la requête
         $req = $this->connexion->prepare($sql);
         // éxecution de la requête
@@ -73,7 +73,6 @@ class User
         $req->execute();
         $user = $req->fetch(PDO::FETCH_ASSOC);
         if ($user) {
-            print_r("user exist");
             return $user;
         } else {
             return null; // L'utilisateur n'a pas été trouvé

@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === "PUT") {
       }
     }
   } else {
+    http_response_code(503);
     echo json_encode(['message' => "Les données ne sont pas complètes"]);
   }
 } else {

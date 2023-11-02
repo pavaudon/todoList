@@ -18,7 +18,6 @@ class Database {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
       );
-      print_r("connexion ok");
     } catch (\PDOException  $e) {
       echo "Erreur de connexion : " . $e->getMessage();
     }

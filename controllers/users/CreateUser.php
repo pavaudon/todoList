@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
       }
       
   } else {
-      echo json_encode(['message' => "Les données ne sont pas complètes"]);
+    http_response_code(503);
+    echo json_encode(['message' => "Les données ne sont pas complètes"]);
   }
 } else {
   http_response_code(405);
