@@ -22,6 +22,17 @@ class Task {
       }
   }
 
+  public function vakidStatus($status) {
+    if (!is_numeric($status)) {
+      return false;
+    }
+    $int_status = intval($status);
+    if (!is_int($int_status) || $int_status > 3 || $int_status < 1) {
+      return false;
+    }
+    return true;
+  }
+
   public function getAll()
     {
         // On ecrit la requete
@@ -56,9 +67,9 @@ class Task {
     public function update($updatetitle, $updateDescription, $updateStatus)
     {
       $sql = "UPDATE $this->table SET title=:title, description=:description, status=:status WHERE id=:id";
-      // Préparation de la réqête
+      // Préparation de la réquête
       $req = $this->connexion->prepare($sql);
-      // éxecution de la reqête
+      // éxecution de la requête
       $re = $req->execute([
           ":title" => $updatetitle,
           ":description" => $updateDescription,

@@ -16,14 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   $user = new User($db);
   $data = json_decode(file_get_contents("php://input"));
   if (!empty($data->user_id) && !empty($data->title) && !empty($data->description) && !empty($data->status)) {
-    if ($data->status > 3 || $data->status < 1) {
+    if (!$task->vakidStatus($data->status)) {
       http_response_code(503);
       echo json_encode(['message' => "Le status ne peut être que entre 1 et 3"]);
     } if (! $user->getUserById($data->user_id)) {
       http_response_code(503);
       echo json_encode(['message' => "Le user renseigné n'existe pas"]);
     } else {
-      $task->user_id = $data->user_id;
+      $task->user_id = intval($data->user_id);
       $task->title = htmlspecialchars($data->title);
       $task->description = htmlspecialchars($data->description);
       $task->status = htmlspecialchars($data->status);

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === "PUT") {
     }
     if (!$data_update) {
       http_response_code(503);
-      echo json_encode(['message' => "Veuillez donner les modifications a effectuer"]);
+      echo json_encode(['message' => "Veuillez donner les modifications à effectuer"]);
     } else if (!$user->is_valid_email($user->email)) {
       http_response_code(503);
       echo json_encode(['message' => "Le mail renseigné n'est pas valide"]);
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === "PUT") {
       }
     }
   } else {
-    echo json_encode(['message' => "Les données ne sont au complètes"]);
+    echo json_encode(['message' => "Les données ne sont pas complètes"]);
   }
 } else {
   http_response_code(405);
