@@ -4,14 +4,12 @@ header("Access-Control-Allow-Origin: *");
 header("Content-type: application/json; charset= UTF-8");
 header("Access-Control-Allow-Methods: PUT");
 
-require_once '../config/Database.php';
-require_once '../models/User.php';
+require("../../models/User.php");
 
 if ($_SERVER['REQUEST_METHOD'] === "PUT") {
 
   $database = new Database();
   $db = $database->getConnexion();
-
   // On instancie l'objet user
   $user = new User($db);
 
@@ -33,6 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === "PUT") {
     if (!$data_update) {
       http_response_code(503);
       echo json_encode(['message' => "Veuillez donner les modifications a effectuer"]);
+    } else if (!$user->is_valid_email($user->email)) {
+      http_response_code(503);
+      echo json_encode(['message' => "Le mail renseigné n'est pas valide"]);
+    } else if ($user->email_already_exists($data->email)) {
+      http_response_code(503);
+      echo json_encode(['message' => "Le mail renseigné est déjà utilisés"]);
     } else {
       $result = $user->update($update_name, $update_email);
       if ($result) {

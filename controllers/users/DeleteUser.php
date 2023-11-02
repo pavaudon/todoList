@@ -4,17 +4,14 @@ header("Access-Control-Allow-Origin: *");
 header("Content-type: application/json; charset= UTF-8");
 header("Access-Control-Allow-Methods: DELETE");
 
-require_once '../config/Database.php';
-require_once '../models/User.php';
+require("../../models/User.php");
 
 if ($_SERVER['REQUEST_METHOD'] === "DELETE") {
     $database = new Database();
     $db = $database->getConnexion();
     $user = new User($db);
-
     // On récupère les infos envoyées
     $data = json_decode(file_get_contents("php://input"));
-
     if (!empty($data->id)) {
         $user->id = $data->id;
         if ($user->delete()) {

@@ -5,15 +5,15 @@ header("Access-Control-Allow-Origin: *");
 header("Content-type: application/json; charset= UTF-8");
 header("Access-Control-Allow-Methods: GET");
 
-require_once '../config/Database.php';
-require_once '../models/User.php';
+require("../../models/User.php");
+require("../../models/Task.php");
 
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
   $database = new Database();
   $db = $database->getConnexion();
-  $user = new User($db);
+  $task = new Task($db);
   // Récupération des données
-  $statement = $user->getAll();
+  $statement = $task->getAll();
   if ($statement->rowCount() > 0) {
     $data = [];
     $data[] = $statement->fetchAll();
