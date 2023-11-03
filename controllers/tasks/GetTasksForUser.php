@@ -19,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
       http_response_code(503);
       echo json_encode(['message' => "Le user renseigné n'existe pas"]);
     } else {
-      $statement = $task->getTasks($data->user_id);
-      if ($statement->rowCount() > 0) {
+      $tasks = $task->getTasks($data->user_id);
+      if ($tasks->rowCount() > 0) {
         $res_tasks = [];
-        $res_tasks[] = $statement->fetchAll();
+        $res_tasks[] = $tasks->fetchAll();
         http_response_code(200);
         echo json_encode($res_tasks);
       } else {

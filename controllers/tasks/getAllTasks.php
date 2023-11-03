@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
   $db = $database->getConnexion();
   $task = new Task($db);
   // Récupération des données
-  $statement = $task->getAll();
-  if ($statement->rowCount() > 0) {
+  $tasks = $task->getAll();
+  if ($tasks->rowCount() > 0) {
     $data = [];
-    $data[] = $statement->fetchAll();
+    $data[] = $tasks->fetchAll();
     // renvoie des données sous format json
     http_response_code(200);
     echo json_encode($data);

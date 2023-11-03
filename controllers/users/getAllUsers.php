@@ -12,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
   $db = $database->getConnexion();
   $user = new User($db);
   // Récupération des données
-  $statement = $user->getAll();
-  if ($statement->rowCount() > 0) {
+  $users = $user->getAll();
+  if ($users->rowCount() > 0) {
     $data = [];
-    $data[] = $statement->fetchAll();
+    $data[] = $users->fetchAll();
     // renvoie des données sous format json
     http_response_code(200);
     echo json_encode($data);

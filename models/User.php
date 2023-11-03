@@ -40,7 +40,7 @@ class User
 
     public function email_already_exists($email) {
         $sql = "SELECT COUNT(*) FROM $this->table WHERE email = :email";
-        $req = $this->connexion->query($sql);
+        $req = $this->connexion->prepare($sql);
         $req->bindParam(':email', $email);
         $req->execute();
 
